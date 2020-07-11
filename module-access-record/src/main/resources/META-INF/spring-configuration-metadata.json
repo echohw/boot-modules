@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {
+      "name": "access.record",
+      "type": "com.example.accessrecord.objects.AccessRecordProps",
+      "sourceType": "com.example.accessrecord.objects.AccessRecordProps"
+    }
+  ],
+  "properties": [
+    {
+      "name": "access.record.notice-type",
+      "type": "java.lang.String",
+      "sourceType": "com.example.accessrecord.objects.AccessRecordProps",
+      "defaultValue": "before"
+    },
+    {
+      "name": "access.record.scope",
+      "type": "java.lang.String",
+      "sourceType": "com.example.accessrecord.objects.AccessRecordProps",
+      "defaultValue": "module-access-record"
+    }
+  ],
+  "hints": []
+}
