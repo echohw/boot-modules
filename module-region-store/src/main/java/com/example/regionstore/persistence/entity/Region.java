@@ -50,7 +50,7 @@ public class Region extends LongTimestampedEntity implements Serializable {
     @Column(name = "lat")
     private BigDecimal latitude; // 纬度
     @Column(name = "entity_status")
-    private Byte entityStatus;
+    private Byte entityStatus = 0;
     @Transient
     private Region parent;
 
