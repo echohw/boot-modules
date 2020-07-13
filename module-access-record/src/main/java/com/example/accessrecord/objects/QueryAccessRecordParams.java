@@ -17,7 +17,7 @@ public class QueryAccessRecordParams {
     private String userAgentLike;
     private String handlerClass;
     private String handlerMethod;
-    private Range<Integer> duration;
+    private Range<Integer> duration = new Range<Integer>() {};
     private String scope;
 
 }
