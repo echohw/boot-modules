@@ -7,14 +7,6 @@ import org.aspectj.lang.annotation.Pointcut;
  */
 public class BaseAspect {
 
-    @Pointcut("execution(public * *(..))"
-        + " && !execution(String *.toString())"
-        + " && !execution(int *.hashCode())"
-        + " && !execution(boolean *.canEqual(Object))"
-        + " && !execution(boolean *.equals(Object))")
-    public void publicMethod() {
-    }
-
     @Pointcut("@within(org.springframework.stereotype.Controller) || @within(org.springframework.web.bind.annotation.RestController)")
     public void handlerClass() {
     }
@@ -25,6 +17,14 @@ public class BaseAspect {
         + " || @annotation(org.springframework.web.bind.annotation.PutMapping)"
         + " || @annotation(org.springframework.web.bind.annotation.DeleteMapping)")
     public void handlerMethod() {
+    }
+
+    @Pointcut("@within(com.example.accessrecord.annotation.IgnoreAccessRecord)")
+    public void ignoreClass() {
+    }
+
+    @Pointcut("@annotation(com.example.accessrecord.annotation.IgnoreAccessRecord)")
+    public void ignoreMethod() {
     }
 
 }

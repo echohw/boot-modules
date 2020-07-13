@@ -22,7 +22,7 @@ public class AccessRecordBeforeAspect extends BaseAspect {
     @Autowired
     private AccessRecordHandler accessRecordHandler;
 
-    @Before("handlerClass() && publicMethod() && handlerMethod()")
+    @Before("handlerClass() && !ignoreClass() && handlerMethod() && !ignoreMethod()")
     public void beforeAccess(JoinPoint joinPoint) {
         HttpServletRequest request = WebUtils.getServletRequest();
         if (request == null) {

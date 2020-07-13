@@ -23,7 +23,7 @@ public class AccessRecordAroundAspect extends BaseAspect {
     @Autowired
     private AccessRecordHandler accessRecordHandler;
 
-    @Around("handlerClass() && publicMethod() && handlerMethod()")
+    @Around("handlerClass() && !ignoreClass() && handlerMethod() && !ignoreMethod()")
     public Object aroundAccess(ProceedingJoinPoint pjp) throws Throwable {
         HttpServletRequest request = WebUtils.getServletRequest();
         if (request == null) {
