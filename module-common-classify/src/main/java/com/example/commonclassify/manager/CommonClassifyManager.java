@@ -35,6 +35,9 @@ public class CommonClassifyManager {
     }
 
     public List<CommonClassify> addAll(List<CommonClassify> commonClassifyList) {
+        commonClassifyList.forEach(classify -> {
+            classify.setId(Optional.ofNullable(classify.getId()).orElseGet(IdUtils::getId));
+        });
          return commonClassifyRepos.saveAll(commonClassifyList);
     }
 

@@ -62,8 +62,7 @@ public class RegionManager {
             Region baseRegion = region;
             Region parentRegion;
             int depth = 1;
-            while ((parentRegion = getByAreaCode(baseRegion.getParentCode()).orElse(null))
-                != null) {
+            while ((parentRegion = getByAreaCode(baseRegion.getParentCode()).orElse(null)) != null) {
                 if (depth++ > tracingMaxDepth) {
                     logger.error("搜索路径超过最大深度");
                     break;

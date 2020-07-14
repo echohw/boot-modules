@@ -41,9 +41,9 @@ public class AccessRecord extends LongTimestampedEntity implements Serializable 
     private String handlerClass;
     @Column(name = "handler_method", columnDefinition = "VARCHAR(50) NOT NULL DEFAULT '' COMMENT '处理请求的方法'")
     private String handlerMethod;
-    @Column(name = "req_params", columnDefinition = "VARCHAR(255) DEFAULT NULL COMMENT '请求参数'")
+    @Column(name = "req_params", columnDefinition = "VARCHAR(1000) DEFAULT NULL COMMENT '请求参数'")
     private String reqParams;
-    @Column(name = "resp_content", columnDefinition = "TEXT DEFAULT NULL COMMENT '响应内容'")
+    @Column(name = "resp_content", columnDefinition = "VARCHAR(65535) DEFAULT NULL COMMENT '响应内容'")
     private String respContent;
     @Column(name = "duration", columnDefinition = "INT(11) NOT NULL DEFAULT '0' COMMENT '持续时间'")
     private Integer duration;

@@ -5,8 +5,6 @@ import com.example.accessrecord.persistence.entity.AccessRecord;
 import com.example.accessrecord.persistence.repos.AccessRecordRepos;
 import com.example.accessrecord.persistence.spec.AccessRecordSpecification.QueryAccessRecordSpecification;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,8 +15,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AccessRecordManager {
-
-    private static final Logger logger = LoggerFactory.getLogger(AccessRecordManager.class);
 
     @Autowired
     private AccessRecordRepos accessRecordRepos;

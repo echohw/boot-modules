@@ -23,6 +23,6 @@ public class QueryRegionParams {
     private String shortNameLike;
     private String pinyin;
     private String pinyinLike;
-    private Range<BigDecimal> longitude;
-    private Range<BigDecimal> latitude;
+    private Range<BigDecimal> longitude = new Range<BigDecimal>() {};
+    private Range<BigDecimal> latitude = new Range<BigDecimal>() {};
 }

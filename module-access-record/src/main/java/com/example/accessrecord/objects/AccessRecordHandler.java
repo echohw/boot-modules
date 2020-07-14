@@ -6,6 +6,8 @@ import com.example.devutils.utils.JsonUtils;
 import com.example.devutils.utils.access.RequestUtils;
 import com.example.devutils.utils.access.WebUtils;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Component;
 public class AccessRecordHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(AccessRecordHandler.class);
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Autowired
     private AccessRecordProps accessRecordProps;
@@ -52,7 +55,13 @@ public class AccessRecordHandler {
     }
 
     public void handle(AccessRecord accessRecord) {
-        accessRecordManager.add(accessRecord);
+        executorService.submit(() -> {
+            try {
+                accessRecordManager.add(accessRecord);
+            } catch (Exception ex) {
+                logger.error(ex.getMessage());
+            }
+        });
     }
 
 }
