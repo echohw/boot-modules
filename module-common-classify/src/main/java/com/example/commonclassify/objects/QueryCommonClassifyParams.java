@@ -12,7 +12,7 @@ public class QueryCommonClassifyParams {
     private int pageSize = 10;
 
     private String scope;
-    private String group;
+    private String classify;
     private String name;
     private String pid;
 }

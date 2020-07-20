@@ -7,7 +7,7 @@ CREATE TABLE `access_record` (
   `handler_class` varchar(100) NOT NULL DEFAULT '' COMMENT '处理请求的类',
   `handler_method` varchar(50) NOT NULL DEFAULT '' COMMENT '处理请求的方法',
   `req_params` varchar(1000) DEFAULT NULL COMMENT '请求参数',
-  `resp_content` varchar(65535) DEFAULT NULL COMMENT '响应内容',
+  `resp_content` text DEFAULT NULL COMMENT '响应内容',
   `duration` int(11) NOT NULL DEFAULT '0' COMMENT '持续时间',
   `scope` varchar(20) DEFAULT NULL COMMENT '所属域',
   `entity_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '数据状态',

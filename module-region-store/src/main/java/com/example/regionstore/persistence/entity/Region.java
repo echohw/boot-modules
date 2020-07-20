@@ -1,6 +1,6 @@
 package com.example.regionstore.persistence.entity;
 
-import com.example.regionstore.persistence.LongTimestampedEntity;
+import com.example.commonbase.persistence.LongTimestampedEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;

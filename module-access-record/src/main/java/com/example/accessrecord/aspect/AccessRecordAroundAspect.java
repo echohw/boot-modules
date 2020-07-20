@@ -1,8 +1,8 @@
 package com.example.accessrecord.aspect;
 
 import com.example.accessrecord.objects.AccessRecordHandler;
+import com.example.accessrecord.objects.DesensitizeHandler;
 import com.example.accessrecord.persistence.entity.AccessRecord;
-import com.example.devutils.utils.JsonUtils;
 import com.example.devutils.utils.access.WebUtils;
 import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -21,6 +21,8 @@ public class AccessRecordAroundAspect extends BaseAspect {
     private static final Logger logger = LoggerFactory.getLogger(AccessRecordAroundAspect.class);
 
     @Autowired
+    private DesensitizeHandler desensitizeHandler;
+    @Autowired
     private AccessRecordHandler accessRecordHandler;
 
     @Around("handlerClass() && !ignoreClass() && handlerMethod() && !ignoreMethod()")
@@ -36,7 +38,7 @@ public class AccessRecordAroundAspect extends BaseAspect {
             long duration = end - start;
 
             AccessRecord accessRecord = new AccessRecord();
-            accessRecord.setRespContent(JsonUtils.toJsonStr(respContent));
+            accessRecord.setRespContent(desensitizeHandler.desensitize(respContent));
             accessRecord.setDuration((int) duration);
             try {
                 accessRecordHandler.perfect(pjp, accessRecord);

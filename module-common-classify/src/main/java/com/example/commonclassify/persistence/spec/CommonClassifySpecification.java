@@ -30,8 +30,8 @@ public class CommonClassifySpecification {
             Optional.ofNullable(params.getScope()).ifPresent(scope -> {
                 predicateList.add(criteriaBuilder.equal(root.get("scope").as(String.class), scope));
             });
-            Optional.ofNullable(params.getGroup()).ifPresent(group -> {
-                predicateList.add(criteriaBuilder.equal(root.get("group").as(String.class), group));
+            Optional.ofNullable(params.getClassify()).ifPresent(classify -> {
+                predicateList.add(criteriaBuilder.equal(root.get("classify").as(String.class), classify));
             });
             Optional.ofNullable(params.getName()).ifPresent(name -> {
                 predicateList.add(criteriaBuilder.equal(root.get("name").as(String.class), name));

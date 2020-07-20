@@ -1,4 +1,4 @@
-package com.example.commonclassify.utils;
+package com.example.textfragment.utils;
 
 import java.util.UUID;
 

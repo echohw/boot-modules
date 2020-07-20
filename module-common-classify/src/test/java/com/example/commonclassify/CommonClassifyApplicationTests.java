@@ -26,7 +26,7 @@ class CommonClassifyApplicationTests {
         List<CommonClassify> result = list.stream().map(item -> {
             CommonClassify commonClassify = new CommonClassify();
             commonClassify.setScope("module-common-classify");
-            commonClassify.setGroup("technology-stack");
+            commonClassify.setClassify("technology-stack");
             commonClassify.setName("Java");
             commonClassify.setValue(item);
             commonClassify.setPid("-1");
@@ -37,7 +37,7 @@ class CommonClassifyApplicationTests {
 
     @Test
     public void testQuery() {
-        List<CommonClassify> dataList = commonClassifyManager.getAllByScopeAndGroupAndName("module-common-classify", "technology-stack", "Java");
+        List<CommonClassify> dataList = commonClassifyManager.getAllByScopeAndClassifyAndName("module-common-classify", "technology-stack", "Java");
         List<String> result = dataList.stream().map(CommonClassify::getValue).collect(Collectors.toList());
         System.out.println(result);
     }

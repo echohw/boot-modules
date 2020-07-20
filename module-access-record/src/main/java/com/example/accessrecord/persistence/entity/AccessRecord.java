@@ -1,6 +1,6 @@
 package com.example.accessrecord.persistence.entity;
 
-import com.example.accessrecord.persistence.LongTimestampedEntity;
+import com.example.commonbase.persistence.LongTimestampedEntity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,7 +43,7 @@ public class AccessRecord extends LongTimestampedEntity implements Serializable 
     private String handlerMethod;
     @Column(name = "req_params", columnDefinition = "VARCHAR(1000) DEFAULT NULL COMMENT '请求参数'")
     private String reqParams;
-    @Column(name = "resp_content", columnDefinition = "VARCHAR(65535) DEFAULT NULL COMMENT '响应内容'")
+    @Column(name = "resp_content", columnDefinition = "TEXT DEFAULT NULL COMMENT '响应内容'")
     private String respContent;
     @Column(name = "duration", columnDefinition = "INT(11) NOT NULL DEFAULT '0' COMMENT '持续时间'")
     private Integer duration;

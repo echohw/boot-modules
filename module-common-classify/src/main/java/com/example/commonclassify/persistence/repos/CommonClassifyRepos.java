@@ -14,13 +14,13 @@ public interface CommonClassifyRepos extends JpaRepository<CommonClassify, Strin
 
     List<CommonClassify> findAllByPid(String pid);
 
-    List<CommonClassify> findAllByScopeAndGroupAndName(String scope, String group, String name);
+    List<CommonClassify> findAllByScopeAndClassifyAndName(String scope, String classify, String name);
 
     void deleteAllByPid(String pid);
 
-    void deleteAllByScopeAndGroupAndName(String scope, String group, String name);
+    void deleteAllByScopeAndClassifyAndName(String scope, String classify, String name);
 
-    void deleteAllByScopeAndGroup(String scope, String group);
+    void deleteAllByScopeAndClassify(String scope, String classify);
 
     void deleteAllByScope(String scope);
 

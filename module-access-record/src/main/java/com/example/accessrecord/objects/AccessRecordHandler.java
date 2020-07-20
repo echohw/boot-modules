@@ -27,12 +27,13 @@ public class AccessRecordHandler {
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Autowired
+    private DesensitizeHandler desensitizeHandler;
+    @Autowired
+    private VisitorInfoSupplier visitorInfoSupplier;
+    @Autowired
     private AccessRecordProps accessRecordProps;
     @Autowired
     private AccessRecordManager accessRecordManager;
-    @Autowired(required = false)
-    private VisitorInfoSupplier visitorInfoSupplier;
-    private static final VisitorInfoSupplier defaultVisitorInfoSupplier = request -> "anonym";
 
     public AccessRecord perfect(JoinPoint joinPoint, AccessRecord accessRecord) {
         HttpServletRequest request = WebUtils.getServletRequest();
@@ -43,9 +44,9 @@ public class AccessRecordHandler {
         Signature signature = joinPoint.getSignature();
         accessRecord.setHandlerClass(signature.getDeclaringTypeName());
         accessRecord.setHandlerMethod(signature.getName());
-        accessRecord.setReqParams(Unchecked.supplier(() -> JsonUtils.toJsonStr(joinPoint.getArgs())).get());
+        accessRecord.setReqParams(desensitizeHandler.desensitize(joinPoint.getArgs()));
         accessRecord.setReqUrl(RequestUtils.getUrl(request));
-        Optional.ofNullable((visitorInfoSupplier == null ? defaultVisitorInfoSupplier : visitorInfoSupplier).get(request))
+        Optional.ofNullable(visitorInfoSupplier.get(request))
             .map(visitorInfo -> visitorInfo instanceof String ? (String) visitorInfo : Unchecked.supplier(() -> JsonUtils.toJsonStr(visitorInfo)).get())
             .ifPresent(accessRecord::setVisitor);
         accessRecord.setClientIp(RequestUtils.getIp(request));

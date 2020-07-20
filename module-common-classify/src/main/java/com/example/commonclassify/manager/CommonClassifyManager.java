@@ -4,8 +4,9 @@ import com.example.commonclassify.objects.QueryCommonClassifyParams;
 import com.example.commonclassify.persistence.entity.CommonClassify;
 import com.example.commonclassify.persistence.repos.CommonClassifyRepos;
 import com.example.commonclassify.persistence.spec.CommonClassifySpecification.QueryCommonClassifySpecification;
-import com.example.commonclassify.utils.IdUtils;
 import com.example.devutils.utils.EntityUtils;
+import com.example.devutils.utils.id.IdUtils;
+import com.example.devutils.utils.text.StringUtils;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * Created by AMe on 2020-07-08 06:10.
@@ -27,16 +29,18 @@ public class CommonClassifyManager {
     private static final Logger logger = LoggerFactory.getLogger(CommonClassifyManager.class);
 
     @Autowired
+    private IdUtils idUtils;
+    @Autowired
     private CommonClassifyRepos commonClassifyRepos;
 
     public CommonClassify add(CommonClassify commonClassify) {
-        commonClassify.setId(Optional.ofNullable(commonClassify.getId()).orElseGet(IdUtils::getId));
+        commonClassify.setId(StringUtils.isNotBlank(commonClassify.getId()) ? commonClassify.getId() : String.valueOf(idUtils.nextSnowId()));
         return commonClassifyRepos.save(commonClassify);
     }
 
     public List<CommonClassify> addAll(List<CommonClassify> commonClassifyList) {
         commonClassifyList.forEach(classify -> {
-            classify.setId(Optional.ofNullable(classify.getId()).orElseGet(IdUtils::getId));
+            classify.setId(StringUtils.isNotBlank(classify.getId()) ? classify.getId() : String.valueOf(idUtils.nextSnowId()));
         });
          return commonClassifyRepos.saveAll(commonClassifyList);
     }
@@ -51,13 +55,13 @@ public class CommonClassifyManager {
         return true;
     }
 
-    public boolean deleteAllByScopeAndGroupAndName(String scope, String group, String name) {
-        commonClassifyRepos.deleteAllByScopeAndGroupAndName(scope, group, name);
+    public boolean deleteAllByScopeAndClassifyAndName(String scope, String classify, String name) {
+        commonClassifyRepos.deleteAllByScopeAndClassifyAndName(scope, classify, name);
         return true;
     }
 
-    public boolean deleteAllByScopeAndGroup(String group, String scope) {
-        commonClassifyRepos.deleteAllByScopeAndGroup(group, scope);
+    public boolean deleteAllByScopeAndClassify(String scope, String classify) {
+        commonClassifyRepos.deleteAllByScopeAndClassify(scope, classify);
         return true;
     }
 
@@ -67,6 +71,7 @@ public class CommonClassifyManager {
     }
 
     public CommonClassify updateById(CommonClassify commonClassify) {
+        Assert.hasText(commonClassify.getId(), "id不能为空");
         return commonClassifyRepos.save(commonClassify);
     }
 
@@ -106,8 +111,8 @@ public class CommonClassifyManager {
         return commonClassifyRepos.findAllByPid(pid);
     }
 
-    public List<CommonClassify> getAllByScopeAndGroupAndName(String name, String group, String scope) {
-        return commonClassifyRepos.findAllByScopeAndGroupAndName(name, group, scope);
+    public List<CommonClassify> getAllByScopeAndClassifyAndName(String scope, String classify, String name) {
+        return commonClassifyRepos.findAllByScopeAndClassifyAndName(scope, classify, name);
     }
 
     public Page<CommonClassify> getAllByQueryParams(QueryCommonClassifyParams params) {

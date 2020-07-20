@@ -1,6 +1,6 @@
 package com.example.commonclassify.persistence.entity;
 
-import com.example.commonclassify.persistence.LongTimestampedEntity;
+import com.example.commonbase.persistence.LongTimestampedEntity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "common_classify", indexes = {
-    @Index(name = "idx_scope_group_name", columnList = "scope,group,name")
+    @Index(name = "idx_scope_classify_name", columnList = "scope,classify,name")
 })
 public class CommonClassify extends LongTimestampedEntity implements Serializable {
 
@@ -26,17 +26,17 @@ public class CommonClassify extends LongTimestampedEntity implements Serializabl
     private String id;
     @Column(name = "name", length = 36, nullable = false) // 名称
     private String name;
-    @Column(name = "value") // 值
+    @Column(name = "value", length = 255, nullable = true) // 值
     private String value;
-    @Column(name = "value_remarks", length = 100) // 值备注
+    @Column(name = "value_remarks", length = 100, nullable = true) // 值备注
     private String valueRemarks;
-    @Column(name = "group", length = 36, nullable = false) // 分组
-    private String group;
+    @Column(name = "classify", length = 36, nullable = false) // 分类
+    private String classify;
     @Column(name = "scope", length = 36, nullable = false) // 所属域
     private String scope;
     @Column(name = "pid", length = 36, nullable = false) // 父级ID
     private String pid;
-    @Column(name = "remarks") // 备注
+    @Column(name = "remarks", length = 255, nullable = true) // 备注
     private String remarks;
     @Transient
     private List<CommonClassify> children;
