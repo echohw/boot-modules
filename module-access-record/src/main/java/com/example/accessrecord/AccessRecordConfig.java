@@ -2,11 +2,11 @@ package com.example.accessrecord;
 
 import com.example.accessrecord.aspect.AccessRecordAroundAspect;
 import com.example.accessrecord.aspect.AccessRecordBeforeAspect;
+import com.example.accessrecord.objects.DefaultDesensitizeHandler;
+import com.example.accessrecord.objects.DefaultVisitorInfoSupplier;
 import com.example.accessrecord.objects.DesensitizeHandler;
 import com.example.accessrecord.objects.VisitorInfoSupplier;
 import com.example.commonbase.EnableCommonBase;
-import com.example.devutils.utils.JsonUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -40,19 +40,13 @@ public class AccessRecordConfig {
     @Bean
     @ConditionalOnMissingBean
     public VisitorInfoSupplier visitorInfoSupplier() {
-        return request -> "anonym";
+        return new DefaultVisitorInfoSupplier();
     }
 
     @Bean
     @ConditionalOnMissingBean
     public DesensitizeHandler desensitizeHandler() {
-        return obj -> {
-            try {
-                return obj == null ? null : JsonUtils.toJsonStr(obj);
-            } catch (JsonProcessingException e) {
-                return obj.toString();
-            }
-        };
+        return new DefaultDesensitizeHandler();
     }
 
 }
