@@ -43,6 +43,9 @@ public class AccessRecordSpecification {
             Optional.ofNullable(params.getHandlerMethod()).ifPresent(handlerMethod -> {
                 predicateList.add(criteriaBuilder.equal(root.get("handlerMethod").as(String.class), handlerMethod));
             });
+            Optional.ofNullable(params.getHttpMethod()).ifPresent(httpMethod -> {
+                predicateList.add(criteriaBuilder.equal(root.get("httpMethod").as(String.class), httpMethod));
+            });
             Optional.ofNullable(params.getDuration()).ifPresent(duration -> {
                 Optional.ofNullable(duration.getFrom()).ifPresent(from -> predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("duration").as(Integer.class), from)));
                 Optional.ofNullable(duration.getTo()).ifPresent(to -> predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("duration").as(Integer.class), to)));

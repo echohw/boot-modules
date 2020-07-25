@@ -38,7 +38,7 @@ public class AccessRecordAroundAspect extends BaseAspect {
             long duration = end - start;
 
             AccessRecord accessRecord = new AccessRecord();
-            accessRecord.setRespContent(desensitizeHandler.desensitize(respContent));
+            accessRecord.setRespContent(desensitizeHandler.desensitize("response", respContent));
             accessRecord.setDuration((int) duration);
             try {
                 accessRecordHandler.perfect(pjp, accessRecord);

@@ -6,6 +6,7 @@ CREATE TABLE `access_record` (
   `user_agent` varchar(255) NOT NULL DEFAULT '' COMMENT '客户端UA',
   `handler_class` varchar(100) NOT NULL DEFAULT '' COMMENT '处理请求的类',
   `handler_method` varchar(50) NOT NULL DEFAULT '' COMMENT '处理请求的方法',
+  `http_method` varchar(10) NOT NULL DEFAULT '' COMMENT '请求方式',
   `req_params` varchar(1000) DEFAULT NULL COMMENT '请求参数',
   `resp_content` text DEFAULT NULL COMMENT '响应内容',
   `duration` int(11) NOT NULL DEFAULT '0' COMMENT '持续时间',

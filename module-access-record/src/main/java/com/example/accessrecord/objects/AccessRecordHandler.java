@@ -44,13 +44,14 @@ public class AccessRecordHandler {
         Signature signature = joinPoint.getSignature();
         accessRecord.setHandlerClass(signature.getDeclaringTypeName());
         accessRecord.setHandlerMethod(signature.getName());
-        accessRecord.setReqParams(desensitizeHandler.desensitize(joinPoint.getArgs()));
+        accessRecord.setHttpMethod(request.getMethod());
+        accessRecord.setReqParams(desensitizeHandler.desensitize("request", joinPoint.getArgs()));
         accessRecord.setReqUrl(RequestUtils.getUrl(request));
         Optional.ofNullable(visitorInfoSupplier.get(request))
             .map(visitorInfo -> visitorInfo instanceof String ? (String) visitorInfo : Unchecked.supplier(() -> JsonUtils.toJsonStr(visitorInfo)).get())
             .ifPresent(accessRecord::setVisitor);
         accessRecord.setClientIp(RequestUtils.getIp(request));
-        accessRecord.setUserAgent(RequestUtils.getUserAgent(request));
+        accessRecord.setUserAgent(Optional.ofNullable(RequestUtils.getUserAgent(request)).orElse(""));
         accessRecord.setScope(accessRecordProps.getScope());
         return accessRecord;
     }

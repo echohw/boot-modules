@@ -5,7 +5,7 @@ import org.aspectj.lang.annotation.Pointcut;
 /**
  * Created by AMe on 2020-07-11 14:57.
  */
-public class BaseAspect {
+public abstract class BaseAspect {
 
     @Pointcut("@within(org.springframework.stereotype.Controller) || @within(org.springframework.web.bind.annotation.RestController)")
     public void handlerClass() {

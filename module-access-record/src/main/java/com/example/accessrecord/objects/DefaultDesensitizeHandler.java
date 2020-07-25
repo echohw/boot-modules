@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class DefaultDesensitizeHandler implements DesensitizeHandler {
 
     @Override
-    public String desensitize(Object obj) {
+    public String desensitize(String type, Object obj) {
         try {
             return obj == null ? null : JsonUtils.toJsonStr(obj);
         } catch (JsonProcessingException e) {
