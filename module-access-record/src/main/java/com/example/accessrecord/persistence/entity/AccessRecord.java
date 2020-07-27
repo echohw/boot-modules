@@ -31,6 +31,8 @@ public class AccessRecord extends LongTimestampedEntity implements Serializable 
     private Long id;
     @Column(name = "req_url", columnDefinition = "VARCHAR(100) NOT NULL DEFAULT '' COMMENT '请求地址'")
     private String reqUrl;
+    @Column(name = "req_params", columnDefinition = "VARCHAR(1000) DEFAULT NULL COMMENT '请求参数'")
+    private String reqParams;
     @Column(name = "visitor", columnDefinition = "VARCHAR(36) NOT NULL DEFAULT 'anonym' COMMENT '访问者'")
     private String visitor;
     @Column(name = "client_ip", columnDefinition = "VARCHAR(46) NOT NULL DEFAULT '' COMMENT '客户端IP'")
@@ -43,8 +45,8 @@ public class AccessRecord extends LongTimestampedEntity implements Serializable 
     private String handlerMethod;
     @Column(name = "http_method", columnDefinition = "VARCHAR(10) NOT NULL DEFAULT '' COMMENT '请求方式'")
     private String httpMethod;
-    @Column(name = "req_params", columnDefinition = "VARCHAR(1000) DEFAULT NULL COMMENT '请求参数'")
-    private String reqParams;
+    @Column(name = "method_args", columnDefinition = "VARCHAR(1000) DEFAULT NULL COMMENT '方法参数'")
+    private String methodArgs;
     @Column(name = "resp_content", columnDefinition = "TEXT DEFAULT NULL COMMENT '响应内容'")
     private String respContent;
     @Column(name = "duration", columnDefinition = "INT(11) NOT NULL DEFAULT '0' COMMENT '持续时间'")

@@ -6,5 +6,5 @@ package com.example.accessrecord.objects;
 @FunctionalInterface
 public interface DesensitizeHandler {
 
-    String desensitize(String type, Object obj);
+    String desensitize(DesensitizeDataType type, Object obj);
 }

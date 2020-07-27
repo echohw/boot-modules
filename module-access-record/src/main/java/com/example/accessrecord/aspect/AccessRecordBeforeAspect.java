@@ -35,7 +35,7 @@ public class AccessRecordBeforeAspect extends BaseAspect {
                 accessRecordHandler.perfect(joinPoint, accessRecord);
                 accessRecordHandler.handle(accessRecord);
             } catch (Exception ex) {
-                logger.error(ex.getMessage());
+                logger.error("", ex);
             }
         }
     }

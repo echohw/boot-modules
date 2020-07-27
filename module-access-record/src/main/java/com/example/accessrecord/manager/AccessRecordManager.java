@@ -36,4 +36,8 @@ public class AccessRecordManager {
         return accessRecordRepos.findAll(new QueryAccessRecordSpecification(params), PageRequest.of(params.getPage(), params.getPageSize()));
     }
 
+    public long countByParams(QueryAccessRecordParams params) {
+        return accessRecordRepos.count(new QueryAccessRecordSpecification(params));
+    }
+
 }

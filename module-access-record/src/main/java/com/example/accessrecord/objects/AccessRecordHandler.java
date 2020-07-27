@@ -42,16 +42,17 @@ public class AccessRecordHandler {
             return accessRecord;
         }
         Signature signature = joinPoint.getSignature();
+        accessRecord.setReqUrl(RequestUtils.getUrl(request));
+        accessRecord.setReqParams(desensitizeHandler.desensitize(DesensitizeDataType.REQ_PARAMS, Unchecked.supplier(() -> RequestUtils.getReqParams(request, request.getMethod())).get()));
+        accessRecord.setVisitor(
+            Optional.of(visitorInfoSupplier.get(request)).map(visitorInfo -> visitorInfo instanceof String ? (String) visitorInfo : Unchecked.supplier(() -> JsonUtils.toJsonStr(visitorInfo)).get()).get()
+        );
+        accessRecord.setClientIp(RequestUtils.getIp(request));
+        accessRecord.setUserAgent(Optional.ofNullable(RequestUtils.getUserAgent(request)).orElse(""));
         accessRecord.setHandlerClass(signature.getDeclaringTypeName());
         accessRecord.setHandlerMethod(signature.getName());
         accessRecord.setHttpMethod(request.getMethod());
-        accessRecord.setReqParams(desensitizeHandler.desensitize("request", joinPoint.getArgs()));
-        accessRecord.setReqUrl(RequestUtils.getUrl(request));
-        Optional.ofNullable(visitorInfoSupplier.get(request))
-            .map(visitorInfo -> visitorInfo instanceof String ? (String) visitorInfo : Unchecked.supplier(() -> JsonUtils.toJsonStr(visitorInfo)).get())
-            .ifPresent(accessRecord::setVisitor);
-        accessRecord.setClientIp(RequestUtils.getIp(request));
-        accessRecord.setUserAgent(Optional.ofNullable(RequestUtils.getUserAgent(request)).orElse(""));
+        accessRecord.setMethodArgs(desensitizeHandler.desensitize(DesensitizeDataType.METHOD_ARGS, joinPoint.getArgs()));
         accessRecord.setScope(accessRecordProps.getScope());
         return accessRecord;
     }
@@ -61,7 +62,7 @@ public class AccessRecordHandler {
             try {
                 accessRecordManager.add(accessRecord);
             } catch (Exception ex) {
-                logger.error(ex.getMessage());
+                logger.error("", ex);
             }
         });
     }

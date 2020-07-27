@@ -28,6 +28,9 @@ public class AccessRecordSpecification {
         public Predicate toPredicate(Root<AccessRecord> root, CriteriaQuery<?> criteriaQuery,
             CriteriaBuilder criteriaBuilder) {
             List<Predicate> predicateList = new ArrayList<>();
+            Optional.ofNullable(params.getReqUrl()).ifPresent(reqUrl -> {
+                predicateList.add(criteriaBuilder.equal(root.get("reqUrl").as(String.class), reqUrl));
+            });
             Optional.ofNullable(params.getVisitor()).ifPresent(visitor -> {
                 predicateList.add(criteriaBuilder.equal(root.get("visitor").as(String.class), visitor));
             });

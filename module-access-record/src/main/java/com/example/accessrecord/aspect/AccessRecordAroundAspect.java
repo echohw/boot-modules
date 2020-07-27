@@ -1,6 +1,7 @@
 package com.example.accessrecord.aspect;
 
 import com.example.accessrecord.objects.AccessRecordHandler;
+import com.example.accessrecord.objects.DesensitizeDataType;
 import com.example.accessrecord.objects.DesensitizeHandler;
 import com.example.accessrecord.persistence.entity.AccessRecord;
 import com.example.devutils.utils.access.WebUtils;
@@ -38,13 +39,13 @@ public class AccessRecordAroundAspect extends BaseAspect {
             long duration = end - start;
 
             AccessRecord accessRecord = new AccessRecord();
-            accessRecord.setRespContent(desensitizeHandler.desensitize("response", respContent));
+            accessRecord.setRespContent(desensitizeHandler.desensitize(DesensitizeDataType.RESP_CONTENT, respContent));
             accessRecord.setDuration((int) duration);
             try {
                 accessRecordHandler.perfect(pjp, accessRecord);
                 accessRecordHandler.handle(accessRecord);
             } catch (Exception ex) {
-                logger.error(ex.getMessage());
+                logger.error("", ex);
             }
             return respContent;
         }

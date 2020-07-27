@@ -39,13 +39,13 @@ public class AccessRecordConfig {
 
     @Bean
     @ConditionalOnMissingBean
-    public VisitorInfoSupplier visitorInfoSupplier() {
+    public VisitorInfoSupplier defaultVisitorInfoSupplier() {
         return new DefaultVisitorInfoSupplier();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public DesensitizeHandler desensitizeHandler() {
+    public DesensitizeHandler defaultDesensitizeHandler() {
         return new DefaultDesensitizeHandler();
     }
 

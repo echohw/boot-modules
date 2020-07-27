@@ -12,6 +12,7 @@ public class QueryAccessRecordParams {
     private int page = 0;
     private int pageSize = 10;
 
+    private String reqUrl;
     private String visitor;
     private String clientIp;
     private String userAgentLike;
