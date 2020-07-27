@@ -16,6 +16,8 @@ public interface CommonClassifyRepos extends JpaRepository<CommonClassify, Strin
 
     List<CommonClassify> findAllByScopeAndClassifyAndName(String scope, String classify, String name);
 
+    void deleteByIdIn(List<String> ids);
+
     void deleteAllByPid(String pid);
 
     void deleteAllByScopeAndClassifyAndName(String scope, String classify, String name);

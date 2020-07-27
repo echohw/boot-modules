@@ -50,6 +50,11 @@ public class CommonClassifyManager {
         return true;
     }
 
+    public boolean deleteByIds(List<String> ids) {
+        commonClassifyRepos.deleteByIdIn(ids);
+        return true;
+    }
+
     public boolean deleteAllByPid(String pid) {
         commonClassifyRepos.deleteAllByPid(pid);
         return true;
