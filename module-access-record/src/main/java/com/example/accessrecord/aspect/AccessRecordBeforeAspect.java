@@ -30,6 +30,7 @@ public class AccessRecordBeforeAspect extends BaseAspect {
         } else {
             AccessRecord accessRecord = new AccessRecord();
             accessRecord.setRespContent(null);
+            accessRecord.setRespCode(-1);
             accessRecord.setDuration(-1);
             try {
                 accessRecordHandler.perfect(joinPoint, accessRecord);

@@ -53,6 +53,10 @@ public class AccessRecordSpecification {
                 Optional.ofNullable(duration.getFrom()).ifPresent(from -> predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("duration").as(Integer.class), from)));
                 Optional.ofNullable(duration.getTo()).ifPresent(to -> predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("duration").as(Integer.class), to)));
             });
+            Optional.ofNullable(params.getRespCode()).ifPresent(respCode -> {
+                Optional.ofNullable(respCode.getFrom()).ifPresent(from -> predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("respCode").as(Integer.class), from)));
+                Optional.ofNullable(respCode.getTo()).ifPresent(to -> predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("respCode").as(Integer.class), to)));
+            });
             Optional.ofNullable(params.getScope()).ifPresent(scope -> {
                 predicateList.add(criteriaBuilder.equal(root.get("scope").as(String.class), scope));
             });

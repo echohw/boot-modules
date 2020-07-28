@@ -49,6 +49,8 @@ public class AccessRecord extends LongTimestampedEntity implements Serializable 
     private String methodArgs;
     @Column(name = "resp_content", columnDefinition = "TEXT DEFAULT NULL COMMENT '响应内容'")
     private String respContent;
+    @Column(name = "resp_code", columnDefinition = "INT(11) NOT NULL DEFAULT '0' COMMENT '响应状态码'")
+    private Integer respCode;
     @Column(name = "duration", columnDefinition = "INT(11) NOT NULL DEFAULT '0' COMMENT '持续时间'")
     private Integer duration;
     @Column(name = "scope", columnDefinition = "VARCHAR(20) DEFAULT NULL COMMENT '所属域'")

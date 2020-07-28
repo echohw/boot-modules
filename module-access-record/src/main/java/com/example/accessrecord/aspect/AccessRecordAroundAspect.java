@@ -5,7 +5,9 @@ import com.example.accessrecord.objects.DesensitizeDataType;
 import com.example.accessrecord.objects.DesensitizeHandler;
 import com.example.accessrecord.persistence.entity.AccessRecord;
 import com.example.devutils.utils.access.WebUtils;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -40,6 +42,7 @@ public class AccessRecordAroundAspect extends BaseAspect {
 
             AccessRecord accessRecord = new AccessRecord();
             accessRecord.setRespContent(desensitizeHandler.desensitize(DesensitizeDataType.RESP_CONTENT, respContent));
+            accessRecord.setRespCode(Optional.ofNullable(WebUtils.getServletResponse()).map(HttpServletResponse::getStatus).orElse(-1));
             accessRecord.setDuration((int) duration);
             try {
                 accessRecordHandler.perfect(pjp, accessRecord);

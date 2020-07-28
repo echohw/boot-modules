@@ -10,6 +10,7 @@ CREATE TABLE `access_record` (
   `http_method` varchar(10) NOT NULL DEFAULT '' COMMENT '请求方式',
   `method_args` varchar(1000) DEFAULT NULL COMMENT '方法参数',
   `resp_content` text DEFAULT NULL COMMENT '响应内容',
+  `resp_code` int(11) NOT NULL DEFAULT '0' COMMENT '响应状态码',
   `duration` int(11) NOT NULL DEFAULT '0' COMMENT '持续时间',
   `scope` varchar(20) DEFAULT NULL COMMENT '所属域',
   `entity_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '数据状态',

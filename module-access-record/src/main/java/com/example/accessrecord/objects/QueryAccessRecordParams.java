@@ -20,6 +20,7 @@ public class QueryAccessRecordParams {
     private String handlerMethod;
     private String httpMethod;
     private Range<Integer> duration = new Range<Integer>() {};
+    private Range<Integer> respCode = new Range<Integer>() {};
     private String scope;
 
 }
